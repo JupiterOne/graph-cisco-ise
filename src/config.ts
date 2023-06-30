@@ -50,7 +50,7 @@ export interface IntegrationConfig extends IntegrationInstanceConfig {
   port: string;
   username: string;
   password: string;
-  verifyTsl: boolean;
+  verifyTsl?: boolean;
 }
 
 export async function validateInvocation(

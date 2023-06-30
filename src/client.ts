@@ -1,7 +1,7 @@
 import fetch, { RequestInit } from 'node-fetch';
+import https from 'https';
 import { IntegrationConfig } from './config';
 import { retry } from '@lifeomic/attempt';
-import https from 'https';
 import {
   IntegrationError,
   IntegrationLogger,
@@ -22,7 +22,11 @@ export enum ERSApiPath {
   ERS_CONFIG_PATH = '/ers/config',
 }
 
-export class APIClient {
+export enum HttpStatusCode {
+  NOT_FOUND = 404,
+}
+
+export class CiscoIseAPIClient {
   private integrationConfig: IntegrationConfig;
   private baseUrl: string;
   private logger: IntegrationLogger;
@@ -69,8 +73,9 @@ export class APIClient {
 
   private getDefaultHeaders() {
     return {
-      authorization: `Basic ${Buffer.from(
+      Authorization: `Basic ${Buffer.from(
         `${this.integrationConfig.username}:${this.integrationConfig.password}`,
+        'utf8',
       ).toString('base64')}`,
       accept: 'application/json',
     };
@@ -138,21 +143,13 @@ export class APIClient {
       if (err.code === 'ETIMEDOUT') {
         throw new IntegrationProviderAPIError({
           status: 400,
-          statusText: `Unable to reach host due to timeout. This is likely a port configuration issue.`,
-          endpoint: verifyEndpointUrl,
-        });
-      }
-
-      if (err.code === 'ENOTFOUND') {
-        throw new IntegrationProviderAPIError({
-          status: 404,
-          statusText: `Unable to reach host. Please verify that the pan url provided in the integration configurations is correct.`,
+          statusText: `Unable to reach host due to timeout. Please vertify that the host and port are correct and that the ERS API is enabled in settings.`,
           endpoint: verifyEndpointUrl,
         });
       }
 
       throw new IntegrationError({
-        message: err,
+        message: err.message,
         code: err.code,
       });
     }
@@ -162,6 +159,6 @@ export class APIClient {
 export function createAPIClient(
   integrationConfig: IntegrationConfig,
   logger: IntegrationLogger,
-): APIClient {
-  return new APIClient(integrationConfig, logger);
+): CiscoIseAPIClient {
+  return new CiscoIseAPIClient(integrationConfig, logger);
 }
