@@ -59,5 +59,9 @@
     "shipit": {
       "prerelease": false
     }
+  },
+  "dependencies": {
+    "@lifeomic/attempt": "^3.0.3",
+    "https": "^1.0.0"
   }
 }
