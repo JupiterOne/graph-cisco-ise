@@ -53,11 +53,11 @@ describe('#validateInvocation', () => {
     await expect(validateInvocation(executionContext)).resolves.toBeUndefined();
   });
 
-  test(`if verifyTsl is enabled and server's TSL is not trusted, should throw a specific error message`, async () => {
+  test(`if verifyTls is enabled and server's TSL is not trusted, should throw a specific error message`, async () => {
     const executionContext = createMockExecutionContext<IntegrationConfig>({
       instanceConfig: {
         ...integrationConfig,
-        verifyTsl: true,
+        verifyTls: true,
       },
     });
 

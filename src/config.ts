@@ -35,7 +35,7 @@ export const instanceConfigFields: IntegrationInstanceConfigFieldMap = {
     type: 'string',
     mask: true,
   },
-  verifyTsl: {
+  verifyTls: {
     type: 'boolean',
     optional: true,
   },
@@ -50,7 +50,7 @@ export interface IntegrationConfig extends IntegrationInstanceConfig {
   port: string;
   username: string;
   password: string;
-  verifyTsl?: boolean;
+  verifyTls?: boolean;
 }
 
 export async function validateInvocation(
