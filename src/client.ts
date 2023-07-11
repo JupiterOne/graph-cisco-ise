@@ -41,7 +41,27 @@ export class CiscoIseAPIClient {
    * Private methods
    */
 
-  private async executeAPIRequestWithRetries<T>(
+  private getDefaultHeaders() {
+    return {
+      Authorization: `Basic ${Buffer.from(
+        `${this.integrationConfig.username}:${this.integrationConfig.password}`,
+        'utf8',
+      ).toString('base64')}`,
+      accept: 'application/json',
+    };
+  }
+
+  private getHttpsAgent() {
+    return new https.Agent({
+      rejectUnauthorized: this.integrationConfig.verifyTls ?? false,
+    });
+  }
+
+  /**
+   * Public methods
+   */
+
+  public async executeAPIRequestWithRetries<T>(
     requestUrl: string,
     init?: RequestInit,
   ): Promise<T> {
@@ -70,30 +90,6 @@ export class CiscoIseAPIClient {
       },
     });
   }
-
-  private getDefaultHeaders() {
-    return {
-      Authorization: `Basic ${Buffer.from(
-        `${this.integrationConfig.username}:${this.integrationConfig.password}`,
-        'utf8',
-      ).toString('base64')}`,
-      accept: 'application/json',
-    };
-  }
-
-  private buildBaseUrl(apiPath: ERSApiPath) {
-    return `${this.baseUrl}${apiPath}`;
-  }
-
-  private getHttpsAgent() {
-    return new https.Agent({
-      rejectUnauthorized: this.integrationConfig.verifyTls ?? false,
-    });
-  }
-
-  /**
-   * Public methods
-   */
 
   // TODO: add concurrency options
   public async iterateApi<T>(
@@ -153,6 +149,10 @@ export class CiscoIseAPIClient {
         code: err.code,
       });
     }
+  }
+
+  public buildBaseUrl(apiPath: ERSApiPath) {
+    return `${this.baseUrl}${apiPath}`;
   }
 }
 

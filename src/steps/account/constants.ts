@@ -1,13 +1,10 @@
 import { StepEntityMetadata } from '@jupiterone/integration-sdk-core';
 
-export const Steps = {
+export const AccountSteps = {
   ACCOUNT: 'fetch-account',
-  USERS: 'fetch-users',
-  GROUPS: 'fetch-groups',
-  GROUP_USER_RELATIONSHIPS: 'build-user-group-relationships',
 };
 
-export const Entities: Record<'ACCOUNT', StepEntityMetadata> = {
+export const AccountEntities: Record<'ACCOUNT', StepEntityMetadata> = {
   ACCOUNT: {
     resourceName: 'Account',
     _type: 'acme_account',

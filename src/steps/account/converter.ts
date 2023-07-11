@@ -3,7 +3,7 @@ import {
   Entity,
 } from '@jupiterone/integration-sdk-core';
 
-import { Entities } from '../constants';
+import { AccountEntities } from './constants';
 
 export function createAccountEntity(): Entity {
   return createIntegrationEntity({
@@ -11,8 +11,8 @@ export function createAccountEntity(): Entity {
       source: {},
       assign: {
         _key: 'cisco-ise-unique-account-id',
-        _type: Entities.ACCOUNT._type,
-        _class: Entities.ACCOUNT._class,
+        _type: AccountEntities.ACCOUNT._type,
+        _class: AccountEntities.ACCOUNT._class,
         name: 'cisco-ise-account',
       },
     },
