@@ -53,7 +53,7 @@ export class CiscoIseAPIClient {
 
   private getHttpsAgent() {
     return new https.Agent({
-      rejectUnauthorized: this.integrationConfig.verifyTsl ?? false,
+      rejectUnauthorized: this.integrationConfig.verifyTls ?? false,
     });
   }
 
