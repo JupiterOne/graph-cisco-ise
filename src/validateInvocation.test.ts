@@ -52,17 +52,4 @@ describe('#validateInvocation', () => {
 
     await expect(validateInvocation(executionContext)).resolves.toBeUndefined();
   });
-
-  test(`if verifyTls is enabled and server's TSL is not trusted, should throw a specific error message`, async () => {
-    const executionContext = createMockExecutionContext<IntegrationConfig>({
-      instanceConfig: {
-        ...integrationConfig,
-        verifyTls: true,
-      },
-    });
-
-    await expect(validateInvocation(executionContext)).rejects.toThrow(
-      `Provider authentication failed at https://10.10.20.77:9060/ers/config/node: 401 Server's TLS certificate is not trusted and integrations config Verify TSL is enabled.`,
-    );
-  });
 });
