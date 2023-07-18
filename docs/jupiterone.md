@@ -95,19 +95,22 @@ https://github.com/JupiterOne/sdk/blob/main/docs/integrations/development.md
 
 The following entities are created:
 
-| Resources      | Entity `_type`             | Entity `_class` |
-| -------------- | -------------------------- | --------------- |
-| Account        | `acme_account`             | `Account`       |
-| Endpoint       | `cisco_ise_endpoint`       | `Device`        |
-| Endpoint Group | `cisco_ise_endpoint_group` | `Group`         |
+| Resources            | Entity `_type`                   | Entity `_class`   |
+| -------------------- | -------------------------------- | ----------------- |
+| Account              | `acme_account`                   | `Account`         |
+| Endpoint             | `cisco_ise_endpoint`             | `Device`          |
+| Endpoint Group       | `cisco_ise_endpoint_group`       | `Group`           |
+| Network Device       | `cisco_ise_network_device`       | `NetworkEndpoint` |
+| Network Device Group | `cisco_ise_network_device_group` | `Group`           |
 
 ### Relationships
 
 The following relationships are created:
 
-| Source Entity `_type`      | Relationship `_class` | Target Entity `_type` |
-| -------------------------- | --------------------- | --------------------- |
-| `cisco_ise_endpoint_group` | **HAS**               | `cisco_ise_endpoint`  |
+| Source Entity `_type`            | Relationship `_class` | Target Entity `_type`      |
+| -------------------------------- | --------------------- | -------------------------- |
+| `cisco_ise_endpoint_group`       | **HAS**               | `cisco_ise_endpoint`       |
+| `cisco_ise_network_device_group` | **HAS**               | `cisco_ise_network_device` |
 
 <!--
 ********************************************************************************

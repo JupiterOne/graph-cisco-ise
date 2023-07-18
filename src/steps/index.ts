@@ -1,6 +1,11 @@
 import { accountSteps } from './account';
-import { endpointsSteps } from './endpoints';
+import { endpointSteps } from './endpoints';
+import { networkDeviceSteps } from './network-devices';
 
-const integrationSteps = [...accountSteps, ...endpointsSteps];
+const integrationSteps = [
+  ...accountSteps,
+  ...endpointSteps,
+  ...networkDeviceSteps,
+];
 
 export { integrationSteps };

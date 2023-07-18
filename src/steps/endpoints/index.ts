@@ -44,20 +44,24 @@ export async function fetchEndpoints({
         endpointDetails.groupId,
       );
 
-      if (!endpointGroupEntity) return;
-
-      await jobState.addRelationship(
-        createDirectRelationship({
+      if (endpointGroupEntity) {
+        const endpointGroupEndpointRelationship = createDirectRelationship({
           _class: RelationshipClass.HAS,
           from: endpointGroupEntity,
           to: endpointEntity,
-        }),
-      );
+        });
+
+        if (jobState.hasKey(endpointGroupEndpointRelationship._key)) {
+          return;
+        }
+
+        await jobState.addRelationship(endpointGroupEndpointRelationship);
+      }
     }
   });
 }
 
-export const endpointsSteps: IntegrationStep<IntegrationConfig>[] = [
+export const endpointSteps: IntegrationStep<IntegrationConfig>[] = [
   {
     id: EndpointSteps.ENDPOINT_GROUP,
     name: 'Fetch Endpoint Groups',

@@ -11,7 +11,7 @@ export function createEndpointGroupEntity(
 ): Entity {
   return createIntegrationEntity({
     entityData: {
-      source: {},
+      source: endpointGroup,
       assign: {
         _key: endpointGroup.id,
         _type: EndpointsEntities.ENDPOINT_GROUP._type,
@@ -34,7 +34,7 @@ export function createEndpointEntity(endpoint: EndpointDetails): Entity {
   );
   return createIntegrationEntity({
     entityData: {
-      source: {},
+      source: endpoint,
       assign: {
         _key: endpoint.id,
         _type: EndpointsEntities.ENDPOINT._type,
