@@ -25,12 +25,25 @@ export type Link = {
 
 export type EndpointGroup = {
   id: string;
-  name?: string;
+  name: string;
+  description?: string;
+  link?: Link;
+};
+
+export type NetworkDeviceGroup = {
+  id: string;
+  name: string;
   description?: string;
   link?: Link;
 };
 
 export type Endpoint = {
+  id: string;
+  name?: string;
+  link?: Link;
+};
+
+export type NetworkDevice = {
   id: string;
   name?: string;
   link?: Link;
@@ -54,4 +67,64 @@ export type EndpointDetails = {
   customAttributes?: {
     customAttributes?: { [key: string]: string | number | boolean };
   };
+};
+
+export type NetworkDeviceIP = {
+  ipaddress: string;
+  mask?: number;
+};
+
+export type NetworkDeviceDetails = {
+  id: string;
+  NetworkDeviceIPList: NetworkDeviceIP[];
+  NetworkDeviceGroupList: string[];
+  authenticationSettings?: {
+    networkProtocol?: string;
+    radiusSharedSecret?: string;
+    enableKeyWrap?: boolean;
+    dtlsRequired?: boolean;
+    enableMultiSecret?: boolean;
+    keyEncryptionKey?: string;
+    messageAuthenticatorCodeKey?: string;
+    keyInputFormat?: string;
+  };
+  snmpsettings?: {
+    version?: string;
+    roCommunity?: string;
+    pollingInterval?: number;
+    linkTrapQuery?: boolean;
+    macTrapQuery?: boolean;
+    originatingPolicyServicesNode?: string;
+  };
+  trustsecsettings?: {
+    deviceAuthenticationSettings?: {
+      sgaDeviceId?: string;
+      sgaDevicePassword?: string;
+    };
+    sgaNotificationAndUpdates?: {
+      downlaodEnvironmentDataEveryXSeconds?: number;
+      downlaodPeerAuthorizationPolicyEveryXSeconds?: number;
+      reAuthenticationEveryXSeconds?: number;
+      downloadSGACLListsEveryXSeconds?: number;
+      otherSGADevicesToTrustThisDevice?: boolean;
+      sendConfigurationToDevice?: boolean;
+      sendConfigurationToDeviceUsing?: string;
+      coaSourceHost?: string;
+    };
+    deviceConfigurationDeployment?: {
+      includeWhenDeployingSGTUpdates?: boolean;
+      enableModePassword?: string;
+      execModePassword?: string;
+      execModeUsername?: string;
+    };
+    pushIdSupport?: boolean;
+  };
+  tacacsSettings?: {
+    sharedSecret?: string;
+    connectModeOptions?: string;
+  };
+  profileName?: string;
+  coaPort?: number;
+  dtlsDnsName?: string;
+  link?: Link;
 };
