@@ -48,6 +48,7 @@ export const EndpointsEntities: Record<
         'link.rel': { type: 'string' },
         'link.href': { type: 'string' },
         'link.type': { type: 'string' },
+        //
       },
     },
   },

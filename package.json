@@ -62,6 +62,7 @@
   },
   "dependencies": {
     "@lifeomic/attempt": "^3.0.3",
+    "@microsoft/microsoft-graph-types": "^2.38.0",
     "https": "^1.0.0"
   }
 }
